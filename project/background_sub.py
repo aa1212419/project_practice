@@ -1,6 +1,6 @@
 import cv2
 
-# 創建一個 VideoCapture 對象，讀取視頻
+# 創建一個 VideoCapture 對象，讀取影片
 cap = cv2.VideoCapture("project/video/background_sub_1.mp4")
 
 # 創建一個背景分割器
