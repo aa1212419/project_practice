@@ -1,6 +1,6 @@
 import cv2
 
-img = cv2.imread('img/shape.jpg')
+img = cv2.imread('project/img/shape.jpg')
 imgContour = img.copy()
 img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 canny = cv2.Canny(img,150,200)
