@@ -1,7 +1,7 @@
 import cv2
 
 # 創建一個 VideoCapture 對象，讀取影片
-cap = cv2.VideoCapture("project_practice/project/video/background_sub_1.mp4")
+cap = cv2.VideoCapture("project_practice/project/video/721558923.288186.mp4")
 
 # 創建一個背景分割器
 bg_subtractor = cv2.createBackgroundSubtractorMOG2()
@@ -42,7 +42,7 @@ while True:
         cv2.line(frame, coordinates[i - 1], coordinates[i], (0, 0, 255), 1)
 
     cv2.imshow("Foreground Mask", thresh)
-    #cv2.imshow("Original Video", frame)
+    cv2.imshow("Original Video", frame)
     
     
     if cv2.waitKey(1) & 0xFF == ord('q'):
