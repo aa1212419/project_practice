@@ -41,13 +41,11 @@ while True:
     for i in range(1, len(coordinates)):
         cv2.line(frame, coordinates[i - 1], coordinates[i], (0, 0, 255), 1)
 
-    cv2.imshow("Foreground Mask", fg_mask)
     cv2.imshow("Original Video", frame)
-    
+    cv2.imshow("Foreground Mask", fg_mask)
     
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
 cap.release()
 cv2.destroyAllWindows()
-
