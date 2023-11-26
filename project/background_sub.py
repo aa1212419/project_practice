@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # 創建一個 VideoCapture 對象，讀取影片
-cap = cv2.VideoCapture("project/video/11:27.mp4")
+cap = cv2.VideoCapture("project/video/11/27.mp4")
 
 # 創建一個背景分割器
 bg_subtractor = cv2.createBackgroundSubtractorMOG2(detectShadows=False)
