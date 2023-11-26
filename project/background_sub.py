@@ -23,6 +23,7 @@ while True:
         # 對前景掩碼進行後處理，去除小的雜訊
         thresh = cv2.erode(thresh, None, iterations=2)
         thresh = cv2.dilate(thresh, None, iterations=2)
+        thresh = cv2.medianBlur(thresh, 5)
         
         # 尋找前景物體的輪廓
         contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -31,7 +32,7 @@ while True:
             area = cv2.contourArea(contour)
              # 只繪製足夠大的前景區域
             x, y, w, h = cv2.boundingRect(contour)
-            if(x+w * 1.5 > y+h) and area > 1000:
+            if float(h)/w > 0.5 and area > 1000:
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
                 # 在表中記錄標記的座標
@@ -44,10 +45,11 @@ while True:
         for i in range(1, len(coordinates)):
             cv2.line(frame, coordinates[i - 1], coordinates[i], (0, 0, 255), 1)
 
-        
+
         cv2.imshow("Foreground Mask", thresh)
         cv2.imshow("Original Video", frame)
-        
+
+       
         key = cv2.waitKey(1) & 0xFF
         
         if key  == ord('q'):
