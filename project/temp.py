@@ -37,8 +37,8 @@ while True:
         for contour in contours:
             area = cv2.contourArea(contour)
 
-            # 面積夠大再處理
-            if area > 1000:
+            # 只处理足够大的前景区域
+            if area > 1000:  # 1000 是面积阈值，可以根据需要调整
                 x, y, w, h = cv2.boundingRect(contour)
                 if float(h) / w > 0.5:
                     cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
@@ -46,6 +46,7 @@ while True:
                     # 在表中记录标记的坐标
                     coordinates.append((x + w // 2, y + h // 2))
 
+                    # 将轮廓绘制到 filtered_thresh 上
                     cv2.drawContours(filtered_thresh, [contour], -1, (255), thickness=cv2.FILLED)
 
             if len(coordinates) > max_length:

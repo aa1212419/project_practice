@@ -4,7 +4,7 @@ import numpy as np
 def empty(v):
     pass 
 
-img = cv2.imread('project_practice/project/img/XiWinnie.jpg')
+img = cv2.imread('project/img/XiWinnie.jpg')
 img = cv2.resize(img,(0,0),fx=0.5,fy=0.5)
 
 cv2.namedWindow('TrackBar')
