@@ -22,36 +22,36 @@ while True:
         fg_mask = bg_subtractor.apply(frame)
         _, thresh = cv2.threshold(fg_mask, 127, 255, 0)
 
-        # 对前景掩码进行后处理，去除小的杂讯
-        thresh = cv2.erode(thresh, None, iterations=2)
-        thresh = cv2.dilate(thresh, None, iterations=2)
+       
+        thresh = cv2.erode(thresh, None, iterations=5)
+        thresh = cv2.dilate(thresh, None, iterations=5)
         thresh = cv2.medianBlur(thresh, 5)
 
-        # 寻找前景物体的轮廓
+        
         contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-        # 创建一个和 thresh 形状一样的全黑图像
+       
         filtered_thresh = np.zeros_like(thresh)
 
-        # 绘制检测到的前景物体
+        
         for contour in contours:
             area = cv2.contourArea(contour)
 
-            # 面積夠大再處理
+            
             if area > 1000:
                 x, y, w, h = cv2.boundingRect(contour)
                 if float(h) / w > 0.5:
                     cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
-                    # 在表中记录标记的坐标
+                    
                     coordinates.append((x + w // 2, y + h // 2))
 
                     cv2.drawContours(filtered_thresh, [contour], -1, (255), thickness=cv2.FILLED)
 
             if len(coordinates) > max_length:
-                coordinates.pop(0)  # 移除最旧的坐标
+                coordinates.pop(0) 
 
-        # 绘制连接各个时段标记的路径
+       
         for i in range(1, len(coordinates)):
             cv2.line(frame, coordinates[i - 1], coordinates[i], (0, 0, 255), 1)
 
@@ -62,7 +62,7 @@ while True:
 
         if key == ord('q'):
             break
-        elif key == ord('p'):  # 按 'p' 暂停或恢复
+        elif key == ord('p'):  
             while True:
                 key = cv2.waitKey(1)
                 if key == ord('p') or key == ord('q'):
